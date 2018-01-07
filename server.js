@@ -57,6 +57,11 @@ app.get('/' , (req , res)=>{
     currentpage : ' Home hbs '
   });
 });
+app.get('/projects',(req, res)=>{
+  res.render('projects.hbs',{
+    currentpage : ' Project '
+  });
+});
 app.get('/bad' , (req ,res)=>{
     res.send({
       error: 'Error , Page not found 404!'

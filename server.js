@@ -12,15 +12,16 @@
 // HANDLER is the function executed when the route is matched.
 const express = require('express');
 const hbs = require('hbs');
+const port = process.env.PORT || 3000;
 var app = express() ;     // app is an instance of express.
 
 // maintanence.hbs
 // now our webpage always display maintainence period message, as we have changed the middleware to show it always.
-app.use((req , res , next)=>{
-  res.render('maintain.hbs',{
-    msg:'Sorry for the in-convenience'
-  });
-});
+// app.use((req , res , next)=>{
+//   res.render('maintain.hbs',{
+//     msg:'Sorry for the in-convenience'
+//   });
+// });
 app.use((req, res, next)=>{
   var now = new Date().toString();
   console.log(`${now} : ${req.method} and ${req.path}`);
@@ -69,6 +70,7 @@ app.get('/bad' , (req ,res)=>{
 // express.static(root, [options])
 app.use(express.static(__dirname+'/public'));
 app.use(express.static(__dirname+'/public1'));
-app.listen(3000 ,()=>{
-  console.log('Listening to port 3000');
+// for heroku we have change our port to dynamic
+app.listen(port ,()=>{
+  console.log(`Listening to port ${port}`);
 });

@@ -13,13 +13,7 @@
 const express = require('express');
 const hbs = require('hbs');
 var app = express() ;     // app is an instance of express.
-app.use((req, res, next)=>{
-  var now = new Date().toString();
-  console.log(`${now} : ${req.method} and ${req.path}`);
-//   req.method
-// Contains a string corresponding to the HTTP method of the request: GET, POST, PUT, and so on.
-  next();
-});
+
 // maintanence.hbs
 // now our webpage always display maintainence period message, as we have changed the middleware to show it always.
 app.use((req , res , next)=>{
@@ -27,7 +21,13 @@ app.use((req , res , next)=>{
     msg:'Sorry for the in-convenience'
   });
 });
-
+app.use((req, res, next)=>{
+  var now = new Date().toString();
+  console.log(`${now} : ${req.method} and ${req.path}`);
+//   req.method
+// Contains a string corresponding to the HTTP method of the request: GET, POST, PUT, and so on.
+  next();
+});
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine','hbs');
 hbs.registerHelper('getcurrentyear',()=>{
